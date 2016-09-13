@@ -72,10 +72,6 @@
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"></action>
             </intent-filter>
         </receiver>
-        <!--umeng start -->
-
-        <meta-data android:value="57d5329667e58e56f8002c92" android:name="UMENG_APPKEY"></meta-data>
-        <meta-data android:value="c1" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>
