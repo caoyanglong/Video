@@ -3,6 +3,7 @@ package com.day.l.video.share;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.day.l.video.BuildConfig;
 import com.tencent.mm.sdk.openapi.GetMessageFromWX;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -20,7 +21,7 @@ public class WXShare {
     private Context context;
     private Bundle bundle;
     private String text;
-    public static final String WX_KEY = "wx2b5387025852c4b1";
+    public static final String WX_KEY = BuildConfig.DEBUG?"wx2b5387025852c4b1":"wxb3bd26f0ded297c8";
 
     public WXShare(Context context, Bundle bundle, String text) {
         this.context = context;

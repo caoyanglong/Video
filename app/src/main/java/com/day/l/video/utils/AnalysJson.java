@@ -1,5 +1,6 @@
 package com.day.l.video.utils;
 
+import com.day.l.video.model.VideoStateEntity;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -9,6 +10,7 @@ import org.json.JSONObject;
  * email:670654904@qq.com
  */
 public class AnalysJson {
+    public static String key = null;
     public static <T> T getEntity(String json,Class<T> tClass){
         try {
             return new Gson().fromJson(json,tClass);
@@ -24,5 +26,14 @@ public class AnalysJson {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String getData(String json){
+        try{
+            json = DES.decrypt(AnalysJson.getEntity(json,VideoStateEntity.class).getData());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return json;
     }
 }

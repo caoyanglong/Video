@@ -27,12 +27,14 @@ import com.day.l.video.model.StatusEntity;
 import com.day.l.video.model.UpdateEntity;
 import com.day.l.video.utils.AnalysJson;
 import com.day.l.video.utils.Constants;
+import com.day.l.video.utils.DownloadUtils;
 import com.day.l.video.utils.ImageUtil;
 import com.day.l.video.utils.LoadingPicture;
 import com.day.l.video.utils.PhoneVersion;
 import com.day.l.video.utils.PictureUtil;
 import com.day.l.video.utils.SDCard;
 import com.day.l.video.utils.SharePrefrenceUtil;
+import com.day.l.video.utils.StatusCode;
 import com.day.l.video.widgets.LoadingView;
 
 import net.tsz.afinal.http.AjaxParams;
@@ -187,8 +189,8 @@ public class MyFragment extends BaseLazyFragment implements View.OnClickListener
             loadFinshed();
             if (data != null) {
                Log.d("json_key",data.toString());
-                UpdateEntity entity = AnalysJson.getEntity(data,UpdateEntity.class);
-                if(entity.getStatus() == 1){
+                final UpdateEntity entity = AnalysJson.getEntity(data,UpdateEntity.class);
+                if(entity.getStatus() == StatusCode.SUCCESS_CODE){
                     AlertDialog.Builder builder = new AlertDialog.Builder(context)
                             .setTitle("发现新版本")
                             .setMessage(entity.getMsg())
@@ -201,12 +203,7 @@ public class MyFragment extends BaseLazyFragment implements View.OnClickListener
                             .setPositiveButton("升级", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    Intent intent = new Intent();
-                                    intent.setAction("android.intent.action.VIEW");
-                                    Uri content_url = Uri.parse("http://www.jb51.net");
-                                    intent.setData(content_url);
-                                    startActivity(intent);
-
+                                    DownloadUtils.addDownloadTask(context,entity.getData().getLink(),entity.getData().getVersion()+".apk");
                                 }
                             });
                     updateDialog = builder.create();

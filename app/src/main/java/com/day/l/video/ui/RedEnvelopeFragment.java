@@ -127,7 +127,7 @@ public class RedEnvelopeFragment extends BaseLazyFragment {
                     Dialog dialog;
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     //    指定下拉列表的显示数据
-                    final String[] cities = {"朋友圈", "微信好友","取消"};
+                    final String[] cities = {"朋友圈","取消"};
                     //    设置一个下拉的列表选择项
                     builder.setItems(cities, new DialogInterface.OnClickListener()
                     {
@@ -142,9 +142,10 @@ public class RedEnvelopeFragment extends BaseLazyFragment {
                                     break;
                                 }
                                 case 1:
-                                    TencentManager manager = new TencentManager(getActivity());
-                                    manager.shareWeChatWebPage(TencentManager.SCENE_WECHAT,bean.getDescribe(),bean.getDescribe(),
-                                            bean.getLink(),bean.getRedbag_id());
+//                                    TencentManager manager = new TencentManager(getActivity());
+//                                    manager.shareWeChatWebPage(TencentManager.SCENE_WECHAT,bean.getDescribe(),bean.getDescribe(),
+//                                            bean.getLink(),bean.getRedbag_id());
+                                    dialog.cancel();
                                     break;
                                 case 2:
                                     dialog.cancel();

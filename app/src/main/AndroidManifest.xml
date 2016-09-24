@@ -55,6 +55,10 @@
         <activity
             android:name=".ui.MyRedBagsActivity"
             android:screenOrientation="portrait"></activity>
+        <!--视频详情页面-->
+        <activity
+            android:name=".video.ui.VideoDetailActivity"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".web.WebDetailActivity"
@@ -65,13 +69,11 @@
         <activity
             android:name=".ui.PersonalActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".video.ui.MoreVideoDetailActivity"
+            android:screenOrientation="portrait"></activity>
 
         <service android:name=".service.InstalledService"></service>
-        <receiver android:name=".receiver.InstallReceiver">
-            <intent-filter >
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"></action>
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

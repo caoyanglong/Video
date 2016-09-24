@@ -19,7 +19,7 @@ import com.day.l.video.R;
 public class LoadingPicture {
     public static void loadPicture(Context context, String url, ImageView imageView){
 //        Picasso.with(context).load(url).error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher).into(imageView);
-        Glide.with(context).load(url).error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher).into(imageView);
+        Glide.with(context).load(Constants.getImageUrl(url)).error(R.mipmap.ic_launcher).placeholder(R.mipmap.ic_launcher).into(imageView);
     }
 
     /**

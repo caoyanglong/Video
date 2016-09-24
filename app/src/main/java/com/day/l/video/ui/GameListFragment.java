@@ -40,12 +40,11 @@ import java.util.List;
  * Created by CYL on 16-9-10.
  * email:670654904@qq.com
  */
-public class AppListFragment extends BaseLazyFragment implements LoadingView.LoadingListener{
+public class GameListFragment extends BaseLazyFragment implements LoadingView.LoadingListener{
     private LoadingView loadingView;
     private ListView appLv;
     private MyAdapter adapter;
-    private String type = Constants.APPLICATION_KEY;
-
+    private String type = Constants.GAME_KEY;
 
     private List<AppBeanEntitiy> dataSource = new ArrayList<>();
     @Override

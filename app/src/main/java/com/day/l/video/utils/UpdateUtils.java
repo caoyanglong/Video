@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -45,7 +43,7 @@ public class UpdateUtils {
      * 更新
      */
     private void checkUpdate(){
-        loaderManager.restartLoader(0,null,updateLoader);
+        loaderManager.restartLoader(10,null,updateLoader);
     }
 
     private Dialog updateDialog;
@@ -79,11 +77,7 @@ public class UpdateUtils {
                             .setPositiveButton("升级", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    Intent intent = new Intent();
-                                    intent.setAction("android.intent.action.VIEW");
-//                                    Uri content_url = Uri.parse("http://www.jb51.net");
-                                    intent.setData(Uri.parse(entity.getData().getLink()));
-                                    context.startActivity(intent);
+                                    DownloadUtils.addDownloadTask(context,entity.getData().getLink(),entity.getData().getVersion()+".apk");
                                 }
                             });
                     updateDialog = builder.create();

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import java.util.UUID;
+
 /**
  * Created by cyl
  * on 2016/9/11.
@@ -22,5 +24,8 @@ public class PhoneVersion {
             e.printStackTrace();
         }
         return version;
+    }
+    public static String getIemi(){
+        return "android-"+(UUID.randomUUID()+"").replace("-", "");
     }
 }

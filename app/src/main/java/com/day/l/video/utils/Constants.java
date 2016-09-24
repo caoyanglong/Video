@@ -1,5 +1,8 @@
 package com.day.l.video.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by CYL on 16-9-10.
  * email:670654904@qq.com
@@ -9,6 +12,7 @@ public class Constants {
     public final static String USER_PASS = "user_pass";
     public final static String SUPERIO = "superior";
     public final static String TOKEN = "token";
+    public final static String MONEY_KEY = "money";
     public final static String EXPIRATION_TIME_KEY = "expiration_time";
     public final static String FULL_NAME = "full_name";
     public final static String MOBILE_KEY = "mobile";
@@ -18,6 +22,9 @@ public class Constants {
     public final static String SYSTEM_KEY = "system";
     public final static String VERIOSN_KEY = "version";
     public final static String RED_BAGS_ID = "redbag_id";
+    public final static String TYPE_KEY = "type";
+    public final static String APPLICATION_KEY = "application";
+    public final static String GAME_KEY = "game";
     /**
      * 注册
      */
@@ -79,9 +86,17 @@ public class Constants {
      */
     public final static String APP_LIST_API = "http://115.28.9.92/eliu/index.php/App/Application/index";
     /**
+     * 游戏列表
+     */
+    public final static String GAME_LIST_API = "http://115.28.9.92/doc/index.php?s=/home/page/index/page_id/12";
+    /**
      * 更新版本
      */
     public final static String UPDATE_VERSION_API = "http://115.28.9.92/eliu/index.php/App/Version/up";
+    /**
+     * 提现申请
+     */
+    public final static String APPLY_CASH_PAI = "http://115.28.9.92/eliu/index.php/App/Cash/do_cash";
     /**
      * 检测token 是否有效
      */
@@ -96,6 +111,61 @@ public class Constants {
      * webview 需要加载的地址
      */
     public final static String LOAD_URL = "load_url";
+
+
+    /******************************************************************************************************/
+    public static final String AppID_KEY = "AppID";
+    public static final String TimeStamp_KEY = "TimeStamp";
+    public static final String JSON_KEY = "JSON_KEY";
+
+    public static final String IEMI_KEY = "IEME";
+    public static final String ID = "ID";
+    public static final String VIDEO_NAME = "VIDEO_NAME";
+    public static final String TimeStamp = "TimeStamp";
+    /**
+     * 获取token api
+     */
+    public static final String GET_TOKEN_API = "/API/v.asmx/getMyTokens";
+    /**
+     * 获取视频数据
+     */
+    public static final String GET_VIDEO_DATA_API = "/API/v.asmx/getHomeData";
+    /**
+     * 视频详情
+     */
+    public static final String GET_VIDEO_DETAIL_INFO_API = "/API/v.asmx/getVideoInfos";
+    /**
+     * 获取视频列表
+     */
+    public static final String GET_VIDEO_LIST_DATA_API = "/API/v.asmx/getVideoData";
+
+
+
+    public static final String APPID = "f8cc1b8da74147bbbd50619700a7fef3";
+
+    public static final String keyConstants = "000000000000000000000000";
+    public static final String PRIVATEKEY = "7C26642A4F204DF48791F8C2B776D046";
+
+    public static final String ImageHost = "http://api.v.eeliu.com";
+
+
+    public static String getImageUrl(String iconUrl){
+        if(!iconUrl.contains("http")){
+            iconUrl = ImageHost+iconUrl;
+        }
+        return iconUrl;
+    }
+    public static List<String> VideoHostList = new ArrayList<>();
+    static {
+        VideoHostList.add("http://cache1.video.v.zhuovi.cn");
+        VideoHostList.add("http://cache2.video.v.zhuovi.cn");
+        VideoHostList.add("http://cache3.video.v.zhuovi.cn");
+        VideoHostList.add("http://cache4.video.v.zhuovi.cn");
+        VideoHostList.add("http://cache5.video.v.zhuovi.cn");
+        VideoHostList.add("http://api.v.zhuovi.net");
+        VideoHostList.add("http://api.v.zhuovi.cn");
+    }
+    /*********************************************************************************************************/
 
 
 }

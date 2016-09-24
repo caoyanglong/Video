@@ -9,7 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.day.l.video.base.BaseFragmentActivity;
-import com.day.l.video.ui.AppListFragment;
+import com.day.l.video.ui.AppContainerFragment;
 import com.day.l.video.ui.HomeFragment;
 import com.day.l.video.ui.MyFragment;
 import com.day.l.video.ui.RedEnvelopeFragment;
@@ -59,7 +59,7 @@ public class MainActivity extends BaseFragmentActivity implements ViewPager.OnPa
                 case 0:
                     return new HomeFragment();
                 case 1:
-                    return new AppListFragment();
+                    return new AppContainerFragment();
                 case 2:
                     return new SurperiseFragment();
                 case 3:

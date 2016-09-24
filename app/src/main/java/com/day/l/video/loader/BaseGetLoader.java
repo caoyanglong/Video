@@ -14,8 +14,8 @@ import org.json.JSONObject;
  * email:670654904@qq.com
  */
 public class BaseGetLoader extends AsyncTaskLoader<JSONObject> {
-    private AjaxParams ajaxParams;
-    private String url;
+    protected AjaxParams ajaxParams;
+    protected String url;
     public BaseGetLoader(Context context, AjaxParams ajaxParams, String url) {
         super(context);
         this.ajaxParams = ajaxParams;
