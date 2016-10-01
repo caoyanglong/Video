@@ -30,8 +30,9 @@ public class BaseGetLoader extends AsyncTaskLoader<JSONObject> {
                 Log.d("<requesturl>",url+"?"+ajaxParams.getParamString());
             }
             String content = (String) new FinalHttp().getSync(url,ajaxParams);
-            Log.d("<coentent>",content+"-current:"+ System.currentTimeMillis());
-            return new JSONObject(content);
+            JSONObject object = new JSONObject(content);
+            Log.d("<coentent>",object.toString());
+            return object;
         }catch (Exception e){
             e.printStackTrace();
         }

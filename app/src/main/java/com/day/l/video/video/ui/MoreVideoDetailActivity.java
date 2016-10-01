@@ -45,7 +45,6 @@ public class MoreVideoDetailActivity extends BaseFragmentActivity {
     }
     public class VideoAdapter extends FragmentPagerAdapter {
         public final String[] title = new String[]{"电影","电视剧"};
-        private Bundle bundle = new Bundle();
         public VideoAdapter(FragmentManager fm) {
             super(fm);
 
@@ -53,6 +52,7 @@ public class MoreVideoDetailActivity extends BaseFragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
+            Bundle bundle = new Bundle();
             switch (position){
                 case 0:
                     bundle.putString(Constants.TYPE_KEY,"1");

@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.day.l.video.R;
 import com.day.l.video.base.BaseLazyFragment;
@@ -47,8 +48,9 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
     private ImageView centerAd;
     private View contentContainer;
     private LoadingView loadingView;
-    private ImageView video1, video2, video3,video4, video5, video6;
+    private ImageView video1, video2, video3, video4, video5, video6;
     private View moreVideo;
+    private TextView title1, title2, title3, title4, title5, title6;
 
     @Override
     public int setContentView() {
@@ -69,6 +71,13 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
         video5 = (ImageView) findViewById(R.id.video5);
         video6 = (ImageView) findViewById(R.id.video6);
         moreVideo = findViewById(R.id.more_video);
+
+        title1 = (TextView) findViewById(R.id.title1);
+        title2 = (TextView) findViewById(R.id.title2);
+        title3 = (TextView) findViewById(R.id.title3);
+        title4 = (TextView) findViewById(R.id.title4);
+        title5 = (TextView) findViewById(R.id.title5);
+        title6 = (TextView) findViewById(R.id.title6);
     }
 
     @Override
@@ -98,8 +107,12 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
             if (data != null) {
                 HeaderAdIconEntitiy entitiy = AnalysJson.getEntity(data, HeaderAdIconEntitiy.class);
                 if (entitiy != null) {
-                    dataSource.addAll(entitiy.getData());
-                    adapter.notifyDataSetChanged();
+                    try {
+                        dataSource.addAll(entitiy.getData());
+                        adapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     loadFinshed();
                 } else {
                     loadError();
@@ -129,7 +142,7 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
         public void onLoadFinished(Loader<JSONObject> loader, JSONObject data) {
             if (data != null) {
                 try {
-                    VideoEntity entity = AnalysJson.getEntity(data,VideoEntity.class);
+                    VideoEntity entity = AnalysJson.getEntity(data, VideoEntity.class);
                     initVideoListener(entity);
 
                 } catch (Exception e) {
@@ -151,12 +164,20 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
         LoadingPicture.loadPicture(context, entity.getVideo().get(3).getImageUrl(), video4);
         LoadingPicture.loadPicture(context, entity.getVideo().get(4).getImageUrl(), video5);
         LoadingPicture.loadPicture(context, entity.getVideo().get(5).getImageUrl(), video6);
+
+        title1.setText(entity.getVideo().get(0).getName());
+        title2.setText(entity.getVideo().get(1).getName());
+        title3.setText(entity.getVideo().get(2).getName());
+        title4.setText(entity.getVideo().get(3).getName());
+        title5.setText(entity.getVideo().get(4).getName());
+        title6.setText(entity.getVideo().get(5).getName());
+
         video1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, VideoDetailActivity.class);
-                intent.putExtra(Constants.ID,entity.getVideo().get(0).getID());
-                intent.putExtra(Constants.VIDEO_NAME,entity.getVideo().get(0).getName());
+                intent.putExtra(Constants.ID, entity.getVideo().get(0).getID());
+                intent.putExtra(Constants.VIDEO_NAME, entity.getVideo().get(0).getName());
                 startActivity(intent);
             }
         });
@@ -164,8 +185,8 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, VideoDetailActivity.class);
-                intent.putExtra(Constants.ID,entity.getVideo().get(1).getID());
-                intent.putExtra(Constants.VIDEO_NAME,entity.getVideo().get(1).getName());
+                intent.putExtra(Constants.ID, entity.getVideo().get(1).getID());
+                intent.putExtra(Constants.VIDEO_NAME, entity.getVideo().get(1).getName());
                 startActivity(intent);
             }
         });
@@ -173,8 +194,8 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, VideoDetailActivity.class);
-                intent.putExtra(Constants.ID,entity.getVideo().get(2).getID());
-                intent.putExtra(Constants.VIDEO_NAME,entity.getVideo().get(2).getName());
+                intent.putExtra(Constants.ID, entity.getVideo().get(2).getID());
+                intent.putExtra(Constants.VIDEO_NAME, entity.getVideo().get(2).getName());
                 startActivity(intent);
             }
         });
@@ -182,8 +203,8 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, VideoDetailActivity.class);
-                intent.putExtra(Constants.ID,entity.getVideo().get(3).getID());
-                intent.putExtra(Constants.VIDEO_NAME,entity.getVideo().get(3).getName());
+                intent.putExtra(Constants.ID, entity.getVideo().get(3).getID());
+                intent.putExtra(Constants.VIDEO_NAME, entity.getVideo().get(3).getName());
                 startActivity(intent);
             }
         });
@@ -191,8 +212,8 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, VideoDetailActivity.class);
-                intent.putExtra(Constants.ID,entity.getVideo().get(4).getID());
-                intent.putExtra(Constants.VIDEO_NAME,entity.getVideo().get(4).getName());
+                intent.putExtra(Constants.ID, entity.getVideo().get(4).getID());
+                intent.putExtra(Constants.VIDEO_NAME, entity.getVideo().get(4).getName());
                 startActivity(intent);
             }
         });
@@ -200,8 +221,8 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, VideoDetailActivity.class);
-                intent.putExtra(Constants.ID,entity.getVideo().get(5).getID());
-                intent.putExtra(Constants.VIDEO_NAME,entity.getVideo().get(5).getName());
+                intent.putExtra(Constants.ID, entity.getVideo().get(5).getID());
+                intent.putExtra(Constants.VIDEO_NAME, entity.getVideo().get(5).getName());
                 startActivity(intent);
             }
         });

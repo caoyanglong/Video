@@ -1,5 +1,6 @@
 package com.day.l.video.ui;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -71,13 +72,21 @@ public class MyRedBagsActivity extends BaseFragmentActivity implements LoadingVi
                 Log.d("<json_object>", data.toString());
                 MyRedBagsEntity entity = AnalysJson.getEntity(data, MyRedBagsEntity.class);
                 if (entity != null) {
-                    dataSource.addAll(entity.getData());
-                    adater.notifyDataSetChanged();
+                    try {
+                        dataSource.addAll(entity.getData());
+                        adater.notifyDataSetChanged();
+                        new AlertDialog.Builder(context).setTitle("提示")
+                                .setMessage("最低30元才可以提现")
+                                .setPositiveButton("确定",null)
+                                .setNegativeButton("取消",null)
+                                .show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 loadFinshed();
             } else {
                 loadError();
-                Toast.makeText(context, "提交失败", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -101,12 +110,12 @@ public class MyRedBagsActivity extends BaseFragmentActivity implements LoadingVi
             if (data != null) {
                 StatusEntity entity = AnalysJson.getEntity(data, StatusEntity.class);
                 if (entity.getStatus() == StatusCode.SUCCESS_CODE) {
-                    Toast.makeText(context, "提现申请成功", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyRedBagsActivity.this, "提现申请成功", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(context, entity.getMsg(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyRedBagsActivity.this, entity.getMsg(), Toast.LENGTH_LONG).show();
                 }
             } else {
-
+                Toast.makeText(MyRedBagsActivity.this, "操作失败", Toast.LENGTH_LONG).show();
             }
         }
 

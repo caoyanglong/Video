@@ -1,5 +1,7 @@
 package com.day.l.video.utils;
 
+import android.util.Log;
+
 import com.day.l.video.model.VideoStateEntity;
 import com.google.gson.Gson;
 
@@ -31,7 +33,9 @@ public class AnalysJson {
     public static String getData(String json){
         try{
             json = DES.decrypt(AnalysJson.getEntity(json,VideoStateEntity.class).getData());
+            Log.d("<json_data_data_----->",json.toString());
         }catch (Exception e){
+            Log.d("<json_data_data_----->",json.toString()+e.getMessage());
             e.printStackTrace();
         }
         return json;

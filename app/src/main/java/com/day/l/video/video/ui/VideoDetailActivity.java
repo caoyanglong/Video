@@ -1,5 +1,6 @@
 package com.day.l.video.video.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -59,6 +60,15 @@ public class VideoDetailActivity extends BaseFragmentActivity implements Loading
         scoreTv = (TextView) findViewById(R.id.video_score);
         loadingView = (LoadingView) findViewById(R.id.loading_view);
         contentContainer = findViewById(R.id.top_container);
+        findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,VideoPlayerActivity.class);
+                intent.putExtra(Constants.INDEX_KEY,"1");
+                intent.putExtra(Constants.JSON_KEY,jsonObject.toString());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -77,7 +87,7 @@ public class VideoDetailActivity extends BaseFragmentActivity implements Loading
 
     @Override
     public void initListener() {
-
+        loadingView.setRetryListener(this);
     }
 
     private final LoaderManager.LoaderCallbacks<JSONObject> videoInfosLoader = new LoaderManager.LoaderCallbacks<JSONObject>() {
@@ -187,6 +197,6 @@ public class VideoDetailActivity extends BaseFragmentActivity implements Loading
 
     @Override
     public void retryLoading() {
-
+        getVideoInfos();
     }
 }

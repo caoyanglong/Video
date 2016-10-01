@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MyVideo</string>
+    <string name="loading_video">正在插入碟片...</string>
+    <string name="video_comment_loading_more">加载更多</string>
+    <string name="video_loadmore">加载更多</string>
+    <string-array name="video_loading_str">
+        <item>正在擦亮放映机</item>
+        <item>正在插入碟片</item>
+        <item>正在读取剧本</item>
+        <item>正在寻找导演</item>
+        <item>正在拉开幕布</item>
+        <item>正在调整放映机</item>
+    </string-array>
+</resources>

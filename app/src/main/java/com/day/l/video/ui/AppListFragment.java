@@ -1,11 +1,11 @@
 package com.day.l.video.ui;
 
 import android.app.DownloadManager;
-import android.database.Cursor;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,7 +64,7 @@ public class AppListFragment extends BaseLazyFragment implements LoadingView.Loa
         adapter = new MyAdapter();
         appLv.setAdapter(adapter);
         getLoaderManager().restartLoader(1,null,appListLoader);
-        getLoaderManager().restartLoader(2,null,cursorLoader);
+//        getLoaderManager().restartLoader(2,null,cursorLoader);
     }
 
     @Override
@@ -137,12 +137,18 @@ public class AppListFragment extends BaseLazyFragment implements LoadingView.Loa
             holder.down.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-//                    bean.setDownloadID(reference);
-//                    bean.setStatus(0);
-//                    bean.setPath(new File(Environment.DIRECTORY_DOWNLOADS,bean.getName()+".apk").getAbsolutePath());
-//                    MyDb.getDb(context).save(bean);
-
+                    try {
+                        DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(bean.getLink()));
+                        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE| DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                        request.setDestinationInExternalFilesDir(context,
+                                Environment.DIRECTORY_DOWNLOADS,bean.getName()+".apk");
+                        request.setTitle(bean.getName());
+                        long reference = downloadManager.enqueue(request);
+                        Toast.makeText(context,bean.getName()+"已开始下载",Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             return view;
@@ -161,36 +167,6 @@ public class AppListFragment extends BaseLazyFragment implements LoadingView.Loa
             }
         }
     }
-    private LoaderManager.LoaderCallbacks<Cursor> cursorLoader = new LoaderManager.LoaderCallbacks<Cursor>() {
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-            return new CursorLoader(context,Uri.parse("content://downloads/my_downloads"),null,null,null,null);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-            if(data != null){
-                while (data.moveToNext()){
-//
-                    try {
-                        long downLoadID = data.getLong(data.getColumnIndex(DownloadManager.EXTRA_DOWNLOAD_ID));
-                        int bytes_downloaded = data.getInt(data.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
-                        int bytes_total = data.getInt(data.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
-                        int progress = (int) ((bytes_downloaded * 100) / bytes_total);
-                        Log.d("<progress>",progress+"-"+downLoadID);
-                        Toast.makeText(context,"--"+progress,Toast.LENGTH_SHORT).show();
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-        @Override
-        public void onLoaderReset(Loader<Cursor> loader) {
-
-        }
-    };
 
     @Override
     public void loadingStart() {

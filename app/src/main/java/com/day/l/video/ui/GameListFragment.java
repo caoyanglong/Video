@@ -87,8 +87,12 @@ public class GameListFragment extends BaseLazyFragment implements LoadingView.Lo
                 Log.d("<json_object>",data.toString());
                 AppListEntity appListEntity = AnalysJson.getEntity(data,AppListEntity.class);
                 if(appListEntity != null){
-                    dataSource.addAll(appListEntity.getData());
-                    adapter.notifyDataSetChanged();
+                    try {
+                        dataSource.addAll(appListEntity.getData());
+                        adapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 loadFinshed();
             }

@@ -31,12 +31,14 @@ public class VideoDataLoader extends BaseGetLoader {
             }
             for (String host : Constants.VideoHostList) {
                 try {
-                    object = new JSONObject(AnalysJson.getData((String) new FinalHttp().getSync(host + url, ajaxParams)));
-                    Log.d("<videodata_----->",object.toString());
+                    String content = (String) new FinalHttp().getSync(host + url, ajaxParams);
+                    Log.d("<videodata_----->",content.toString());
+                    object = new JSONObject(AnalysJson.getData(content));
                     if (object != null) {
                         return object;
                     }
                 } catch (Exception e) {
+                    Log.d("<videodata_----->",e.getMessage());
                     e.printStackTrace();
                 }
             }

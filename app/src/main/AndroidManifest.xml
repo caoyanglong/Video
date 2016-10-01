@@ -55,6 +55,13 @@
         <activity
             android:name=".ui.MyRedBagsActivity"
             android:screenOrientation="portrait"></activity>
+        <!--视频播放器activity -->
+        <activity
+            android:name=".video.ui.VideoPlayerActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/appCompat.fullScreen"
+            android:process=":videoplayer"
+            ></activity>
         <!--视频详情页面-->
         <activity
             android:name=".video.ui.VideoDetailActivity"

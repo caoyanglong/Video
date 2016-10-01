@@ -59,6 +59,10 @@ public class LoadingView extends FrameLayout {
         setLoadingType(type);
     }
 
+    public void setLoadingText(String loadText){
+        loadingText.setText(loadText);
+    }
+
     public enum LoadingType{
         /**
          * 加载中...

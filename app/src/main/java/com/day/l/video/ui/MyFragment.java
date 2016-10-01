@@ -189,27 +189,32 @@ public class MyFragment extends BaseLazyFragment implements View.OnClickListener
             loadFinshed();
             if (data != null) {
                Log.d("json_key",data.toString());
-                final UpdateEntity entity = AnalysJson.getEntity(data,UpdateEntity.class);
-                if(entity.getStatus() == StatusCode.SUCCESS_CODE){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                            .setTitle("发现新版本")
-                            .setMessage(entity.getMsg())
-                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    updateDialog.cancel();
-                                }
-                            })
-                            .setPositiveButton("升级", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    DownloadUtils.addDownloadTask(context,entity.getData().getLink(),entity.getData().getVersion()+".apk");
-                                }
-                            });
-                    updateDialog = builder.create();
-                    updateDialog.show();
-                }else{
-                    Toast.makeText(context,"已经最新版本",Toast.LENGTH_SHORT).show();
+                try {
+                    final UpdateEntity entity = AnalysJson.getEntity(data,UpdateEntity.class);
+                    if(entity.getStatus() == StatusCode.SUCCESS_CODE){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                                .setTitle("发现新版本")
+                                .setMessage(entity.getMsg())
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        updateDialog.cancel();
+                                    }
+                                })
+                                .setPositiveButton("升级", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        DownloadUtils.addDownloadTask(context,entity.getData().getLink(),entity.getData().getVersion()+".apk");
+                                    }
+                                });
+                        updateDialog = builder.create();
+                        updateDialog.show();
+                    }
+                    else{
+                        Toast.makeText(context,"已经最新版本",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }

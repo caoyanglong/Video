@@ -75,8 +75,12 @@ public class RedEnvelopeFragment extends BaseLazyFragment {
             if (data != null) {
                 RedBagsListEntity entity = AnalysJson.getEntity(data,RedBagsListEntity.class);
                 if(entity != null){
-                    dataSource.addAll(entity.getData());
-                    adapter.notifyDataSetChanged();
+                    try {
+                        dataSource.addAll(entity.getData());
+                        adapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -116,7 +120,7 @@ public class RedEnvelopeFragment extends BaseLazyFragment {
                 viewholder = (Viewholder) view.getTag();
             }
             final RedBagsListEntity.DataBean bean = dataSource.get(i);
-            viewholder.bagsCount.setText(bean.getNumber());
+            viewholder.bagsCount.setText(bean.getStock());
 //            Picasso.with(context).load(bean.getSrc()).into(viewholder.icon);
             LoadingPicture.loadPicture(context,bean.getSrc(),viewholder.icon);
             viewholder.tips.setText(bean.getDescribe());

@@ -63,8 +63,12 @@ public class ExchangeRecordsActivity extends BaseFragmentActivity implements Loa
                 Log.d("<json_object>",data.toString());
                 ExchangeEntity entity = AnalysJson.getEntity(data,ExchangeEntity.class);
                 if(entity != null){
-                    dataSource.addAll(entity.getData());
-                    adater.notifyDataSetChanged();
+                    try {
+                        dataSource.addAll(entity.getData());
+                        adater.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 loadFinshed();
             }

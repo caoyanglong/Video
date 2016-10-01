@@ -35,9 +35,11 @@ public class MyApplication extends BaseApplication {
      */
     public static final String GET_RED_BAGS_ACTION = "com.day.l.video.GET_RED_BAGS_ACTION";
     public static IWXAPI api;
+    private static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this;
         if(SharePrefrenceUtil.isExit(this, Constants.TOKEN)){
             if(!MathUtils.isExpaireDate(this)){
                 UserConfig.setToken(SharePrefrenceUtil.getProperties(this,Constants.TOKEN));
@@ -51,6 +53,9 @@ public class MyApplication extends BaseApplication {
         api.registerApp(WXShare.WX_KEY);
         IntentFilter filter = new IntentFilter(GET_RED_BAGS_ACTION);
         registerReceiver(redBagsReceiver,filter);
+    }
+    public static Context getMyContext(){
+        return context;
     }
     private BroadcastReceiver redBagsReceiver = new BroadcastReceiver() {
         @Override

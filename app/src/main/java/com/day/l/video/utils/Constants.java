@@ -25,6 +25,7 @@ public class Constants {
     public final static String TYPE_KEY = "type";
     public final static String APPLICATION_KEY = "application";
     public final static String GAME_KEY = "game";
+    public final static String MESSAGE_ID_KEY = "message_id";
     /**
      * 注册
      */
@@ -106,7 +107,14 @@ public class Constants {
      */
     public final static String GET_SHARE_RED_BAGS_API = "http://115.28.9.92/eliu/index.php/App/Redbag/share";
 
-
+    /**
+     * 删除我的消息接口
+     */
+    public final static String DELETE_MESSAGE_API = "http://115.28.9.92/eliu/index.php/App/Message/del_mess";
+    /***
+     * 消息阅读
+     */
+    public final static String READ_MESSAGE_API = "http://115.28.9.92/eliu/index.php/App/Message/read_mess";
     /**
      * webview 需要加载的地址
      */
@@ -117,6 +125,8 @@ public class Constants {
     public static final String AppID_KEY = "AppID";
     public static final String TimeStamp_KEY = "TimeStamp";
     public static final String JSON_KEY = "JSON_KEY";
+    public static final String INDEX_KEY = "index";
+    public static final String VIDEO_RECORDS = "video_records";
 
     public static final String IEMI_KEY = "IEME";
     public static final String ID = "ID";
@@ -130,6 +140,10 @@ public class Constants {
      * 获取视频数据
      */
     public static final String GET_VIDEO_DATA_API = "/API/v.asmx/getHomeData";
+    /**
+     * 解析视频地址的接口
+     */
+    public static final String GET_VIDEOS_URL_API = "/API/v.asmx/getVideos";
     /**
      * 视频详情
      */

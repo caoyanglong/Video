@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff000000"
+    android:gravity="center"
+    >
+    <com.cyl.myvideo.widgets.MyVideoView
+        android:id="@+id/vv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        />
+
+    <LinearLayout
+        android:id="@+id/fl_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:background="@drawable/video_loading_bg"
+        android:padding="@dimen/dp8">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:text="@string/loading_video"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffffff"
+            android:textSize="@dimen/sp14" />
+    </LinearLayout>
+
+    <!--控制按钮 以及 指引图片-->
+    <RelativeLayout
+        android:id="@+id/rl_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7000"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/g_video_guide"
+            />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/operation_volume_brightness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#00000000"
+        android:visibility="invisible"
+        >
+        <ImageView
+            android:id="@+id/operation_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/video_volumn_bg" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:paddingBottom="@dimen/dp18">
+
+            <ImageView
+                android:id="@+id/operation_full"
+                android:layout_width="@dimen/dp70"
+                android:layout_height="wrap_content"
+                android:src="@drawable/video_num_bg"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <ImageView
+                android:id="@+id/operation_percent"
+                android:layout_width="@dimen/dp70"
+                android:layout_height="wrap_content"
+                android:src="@drawable/video_num_front"
+                android:layout_gravity="center_horizontal"
+                />
+        </FrameLayout>
+    </FrameLayout>
+    <RelativeLayout
+        android:id="@+id/video_title_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp50"
+        android:background="#e61a1a1a"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:id="@+id/video_back"
+            android:layout_width="@dimen/dp50"
+            android:layout_height="@dimen/dp50"
+            android:src="@drawable/ic_back"
+            />
+        <TextView
+            android:id="@+id/video_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="@dimen/dp300"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:layout_centerInParent="true"
+            android:textColor="#FFFFFF"
+            />
+    </RelativeLayout>
+
+<!--视频播放器控制栏 start -->
+<LinearLayout
+    android:id="@+id/bottom_control_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp50"
+    android:orientation="horizontal"
+    android:layout_alignParentBottom="true"
+    android:background="#e61a1a1a"
+    android:visibility="gone"
+    >
+    <!--控制按钮暂停-->
+    <CheckBox
+        android:id="@+id/control_button"
+        android:layout_width="@dimen/dp40"
+        android:layout_height="@dimen/dp40"
+        android:background="@drawable/pause_resume_shape"
+        android:button="@null"
+        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <SeekBar
+            android:id="@+id/video_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/video_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/full_screen"
+        android:layout_width="@dimen/dp50"
+        android:layout_height="@dimen/dp50"
+        android:src="@drawable/full_screen"
+        android:visibility="gone"
+        />
+</LinearLayout>
+    <!--视频播放器控制栏 end -->
+</RelativeLayout>
