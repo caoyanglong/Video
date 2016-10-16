@@ -38,6 +38,7 @@ public abstract class BaseFragmentActivity extends AppCompatActivity {
     //返回按钮
     private View back;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

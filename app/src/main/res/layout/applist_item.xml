@@ -44,7 +44,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
-        android:background="#00FF00"
+        android:background="#006400"
         android:textSize="15sp"
         android:textColor="#FFFFFF"
         android:layout_gravity="center_vertical"

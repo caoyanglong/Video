@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/load_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        />
+    <!--顶部广告 start -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/top_banner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/load_progress"
+        >
+    </LinearLayout>
+    <!--顶部广告 end -->
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_banner"
+        android:layout_above="@+id/bottom_banner"
+        ></WebView>
+    <!--底部广告 start -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/bottom_banner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        >
+    </LinearLayout>
+    <!--底部广告 end -->
+
+</RelativeLayout>

@@ -21,6 +21,7 @@ import com.day.l.video.utils.AnalysJson;
 import com.day.l.video.utils.Constants;
 import com.day.l.video.utils.LoadingPicture;
 import com.day.l.video.web.WebDetailActivity;
+import com.day.l.video.widgets.LoadingView;
 
 import net.tsz.afinal.http.AjaxParams;
 
@@ -33,7 +34,9 @@ import java.util.List;
  * Created by CYL on 16-9-10.
  * email:670654904@qq.com
  */
-public class SurperiseFragment extends BaseLazyFragment {
+public class SurperiseFragment extends BaseLazyFragment implements LoadingView.LoadingListener{
+    private LoadingView loadingView;
+    private View contentView;
     private List<SurpriseListEntity.DataBean> dataSource = new ArrayList<>();
     private ListView surpriseLv;
     private MyAdapter adapter;
@@ -45,12 +48,21 @@ public class SurperiseFragment extends BaseLazyFragment {
     @Override
     public void initView(View view) {
         surpriseLv = (ListView) findViewById(R.id.surprise_list);
+        loadingView = (LoadingView) findViewById(R.id.loading_view);
+        contentView = findViewById(R.id.content_container);
+
     }
 
     @Override
     public void initData() {
         adapter = new MyAdapter();
         surpriseLv.setAdapter(adapter);
+        loadingView.setConentContainer(contentView);
+        loadData();
+    }
+
+    private void loadData() {
+        loadingStart();
         getLoaderManager().restartLoader(1,null, surpriseLoader);
     }
 
@@ -74,6 +86,10 @@ public class SurperiseFragment extends BaseLazyFragment {
                     dataSource.addAll(entity.getData());
                     adapter.notifyDataSetChanged();
                 }
+                loadFinshed();
+            }
+            else{
+                loadError();
             }
         }
 
@@ -143,5 +159,23 @@ public class SurperiseFragment extends BaseLazyFragment {
         }
     }
 
+    @Override
+    public void loadingStart() {
+        loadingView.setLoadingType(LoadingView.LoadingType.LOADING);
+    }
 
+    @Override
+    public void loadError() {
+        loadingView.setLoadingType(LoadingView.LoadingType.LOADERROR);
+    }
+
+    @Override
+    public void loadFinshed() {
+        loadingView.setLoadingType(LoadingView.LoadingType.LOADFINISHED);
+    }
+
+    @Override
+    public void retryLoading() {
+        loadData();
+    }
 }

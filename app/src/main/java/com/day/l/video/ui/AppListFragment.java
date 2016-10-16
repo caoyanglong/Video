@@ -61,15 +61,33 @@ public class AppListFragment extends BaseLazyFragment implements LoadingView.Loa
 
     @Override
     public void initData() {
+        this.type = getArguments().getString(Constants.JSON_KEY);
         adapter = new MyAdapter();
         appLv.setAdapter(adapter);
-        getLoaderManager().restartLoader(1,null,appListLoader);
+        loadingView.setRetryListener(this);
+        loadData();
 //        getLoaderManager().restartLoader(2,null,cursorLoader);
+    }
+
+    private void loadData() {
+        loadingStart();
+        getLoaderManager().restartLoader(1,null,appListLoader);
     }
 
     @Override
     public void initListener() {
 
+    }
+
+    /**
+     * 获取对应fragment 的实例
+     * @param bundle
+     * @return
+     */
+    public static AppListFragment getInstance(Bundle bundle){
+        AppListFragment appListFragment = new AppListFragment();
+        appListFragment.setArguments(bundle);
+        return appListFragment;
     }
 
     private final LoaderManager.LoaderCallbacks<JSONObject> appListLoader = new LoaderManager.LoaderCallbacks<JSONObject>() {
@@ -185,6 +203,6 @@ public class AppListFragment extends BaseLazyFragment implements LoadingView.Loa
 
     @Override
     public void retryLoading() {
-
+        loadData();
     }
 }

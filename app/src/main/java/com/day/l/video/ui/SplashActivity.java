@@ -13,11 +13,13 @@ import com.day.l.video.base.BaseFragmentActivity;
 import com.day.l.video.config.UserConfig;
 import com.day.l.video.loader.BaseGetLoader;
 import com.day.l.video.model.SplashEntity;
+import com.day.l.video.utils.AdKey;
 import com.day.l.video.utils.AnalysJson;
 import com.day.l.video.utils.Constants;
 import com.day.l.video.utils.LoadingPicture;
 
 import net.tsz.afinal.http.AjaxParams;
+import net.youmi.android.AdManager;
 
 import org.json.JSONObject;
 
@@ -62,6 +64,7 @@ public class SplashActivity extends BaseFragmentActivity {
     public void initData() {
         getSupportLoaderManager().restartLoader(1,null,splashLoader);
         timer.start();
+        AdManager.getInstance(context).init(AdKey.YOUMI_ID, AdKey.YOUMI_KEY, true, true);
     }
 
     @Override

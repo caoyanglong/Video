@@ -1,6 +1,7 @@
 package com.day.l.video.widgets;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class LoadingView extends FrameLayout {
     private ViewGroup loadingContainer;
     private ViewGroup loadErrorContainer;
     private View contentContainer;
+    private View rootView;
 
     private LoadingListener listener;
 
@@ -45,6 +47,7 @@ public class LoadingView extends FrameLayout {
         loadingText = (TextView) findViewById(R.id.loading_text);
         loadErrorText = (TextView) findViewById(R.id.loading_error);
         retryTv = (TextView) findViewById(R.id.retry);
+        rootView = findViewById(R.id.loadview_root);
         retryTv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +78,19 @@ public class LoadingView extends FrameLayout {
         /**
          * 加载完成的时候
          */
-        LOADFINISHED
+        LOADFINISHED,
+        /**
+         * 加载view周围是透明的情况
+         * 用户提交数据 或者  局部加载
+         */
+        SUSPEND_TYPE;
+    }
+
+    /**
+     * 设置加载失败的文本
+     */
+    public void setLoadErrorText(String errorText){
+        loadingText.setText(errorText);
     }
 
     /**
@@ -83,6 +98,7 @@ public class LoadingView extends FrameLayout {
      * @param type
      */
     public void setLoadingType(LoadingType type){
+        rootView.setBackgroundColor(Color.parseColor("#FFFFFF"));
         if(type == LoadingType.LOADING){
             showContainer(loadingContainer);
             if(contentContainer != null){
@@ -100,6 +116,11 @@ public class LoadingView extends FrameLayout {
             if(contentContainer != null){
                 contentContainer.setVisibility(VISIBLE);
             }
+        }
+        else if(type == LoadingType.SUSPEND_TYPE){
+            showContainer(loadingContainer);
+            //设置透明
+            rootView.setBackgroundColor(Color.parseColor("#00FFFFFF"));
         }
     }
 
@@ -131,6 +152,7 @@ public class LoadingView extends FrameLayout {
     }
     /**
      * 设置内容容器
+     * 当加载时候隐藏这个容器的内容
      * @param view
      */
     public void setConentContainer(View view){

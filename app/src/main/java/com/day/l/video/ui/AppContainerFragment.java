@@ -55,10 +55,11 @@ public class AppContainerFragment extends BaseLazyFragment {
             switch (position){
 
                 case 0:
-                    return new AppListFragment();
+                    bundle.putString(Constants.JSON_KEY,Constants.AppID_KEY);
+                    return AppListFragment.getInstance(bundle);
                 case 1:
-                    bundle.putString("type",Constants.GAME_KEY);
-                    return new GameListFragment();
+                    bundle.putString(Constants.JSON_KEY,Constants.GAME_KEY);
+                    return AppListFragment.getInstance(bundle);
             }
             return null;
         }
