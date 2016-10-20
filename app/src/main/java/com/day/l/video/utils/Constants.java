@@ -159,8 +159,12 @@ public class Constants {
 
     public static final String keyConstants = "000000000000000000000000";
     public static final String PRIVATEKEY = "7C26642A4F204DF48791F8C2B776D046";
-
+    public final static String PAGE_URL_KEY = "pageUrl";
     public static final String ImageHost = "http://api.v.eeliu.com";
+    /**
+     * 第三方的解析平台
+     */
+    public static final String PLUGIN_API = "http://jiexi888.duapp.com/?url=";
 
 
     public static String getImageUrl(String iconUrl){

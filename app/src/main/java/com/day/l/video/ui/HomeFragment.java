@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cyl.myvideo.utils.MyLog;
 import com.day.l.video.R;
 import com.day.l.video.base.BaseLazyFragment;
 import com.day.l.video.config.UserConfig;
@@ -23,8 +24,9 @@ import com.day.l.video.utils.Constants;
 import com.day.l.video.utils.DES;
 import com.day.l.video.utils.LoadingPicture;
 import com.day.l.video.utils.TimeUtils;
-import com.day.l.video.video.ui.MoreVideoDetailActivity;
+import com.day.l.video.video.loader.PluginParseVideoLoader;
 import com.day.l.video.video.loader.VideoDataLoader;
+import com.day.l.video.video.ui.MoreVideoDetailActivity;
 import com.day.l.video.video.ui.VideoDetailActivity;
 import com.day.l.video.web.WebDetailActivity;
 import com.day.l.video.widgets.LoadingView;
@@ -125,6 +127,23 @@ public class HomeFragment extends BaseLazyFragment implements LoadingView.Loadin
 
         }
     };
+    private final LoaderManager.LoaderCallbacks<String> testLoader = new LoaderManager.LoaderCallbacks<String>() {
+        @Override
+        public Loader<String> onCreateLoader(int id, Bundle args) {
+            return new PluginParseVideoLoader(context, args.getString(Constants.PAGE_URL_KEY));
+        }
+
+        @Override
+        public void onLoadFinished(Loader<String> loader, String data) {
+            MyLog.d("<xml>%s",data);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<String> loader) {
+
+        }
+    };
+
     private final LoaderManager.LoaderCallbacks<JSONObject> videoEntityLoader = new LoaderManager.LoaderCallbacks<JSONObject>() {
         @Override
         public Loader<JSONObject> onCreateLoader(int id, Bundle args) {

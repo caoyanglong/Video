@@ -13,6 +13,7 @@ import com.day.l.video.base.BaseFragmentActivity;
 import com.day.l.video.utils.AnalysJson;
 import com.day.l.video.utils.Constants;
 import com.day.l.video.utils.DES;
+import com.day.l.video.utils.PareseVideoByWebview;
 import com.day.l.video.utils.TimeUtils;
 import com.day.l.video.video.entity.PlayVideoEntitiy;
 import com.day.l.video.video.entity.VideoDetailEntity;
@@ -33,7 +34,7 @@ public class VideoPlayerActivity extends BaseFragmentActivity implements Loading
         VideoPlayerView.VideoControlListener {
     private VideoPlayerView playerView;
     private LoadingView loadingView;
-
+    private VideoDetailEntity entity;
     @Override
     public int setContent() {
         return R.layout.video_player_activity_layout;
@@ -51,12 +52,16 @@ public class VideoPlayerActivity extends BaseFragmentActivity implements Loading
         loadingView.setConentContainer(playerView);
         loadingView.setRetryListener(this);
         playerView.setActivity(this);
+        entity = AnalysJson.getEntity(getIntent().getStringExtra(Constants.JSON_KEY), VideoDetailEntity.class);
         loadingUrl();
+
     }
 
     private void loadingUrl() {
         loadingStart();
-        getSupportLoaderManager().restartLoader(1, null, videoLoader);
+
+        PareseVideoByWebview pareseVideoByWebview = new PareseVideoByWebview(context,entity.getSiteUrl());
+//        getSupportLoaderManager().restartLoader(1, null, videoLoader);
     }
 
 
