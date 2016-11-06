@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.cyl.myvideo.widgets.MyVideoView;
 import com.cyl.myvideo.widgets.VideoPlayerView;
@@ -23,6 +22,8 @@ import com.day.l.video.widgets.LoadingView;
 import net.tsz.afinal.http.AjaxParams;
 
 import org.json.JSONObject;
+
+import io.vov.vitamio.widget.VideoView;
 
 /**
  * Created by cyl
@@ -60,7 +61,21 @@ public class VideoPlayerActivity extends BaseFragmentActivity implements Loading
     private void loadingUrl() {
         loadingStart();
 
-        PareseVideoByWebview pareseVideoByWebview = new PareseVideoByWebview(context,entity.getSiteUrl());
+        PareseVideoByWebview pareseVideoByWebview = new PareseVideoByWebview(context);
+        pareseVideoByWebview.setListener(new PareseVideoByWebview.OnParseVideoListener() {
+            @Override
+            public void onPareseVideoSuccess(String url) {
+                if(url == null){
+                    loadError();
+                }else{
+                    playerView.onPrepareAsync(url);
+                    playerView.onStartPlay();
+                    playerView.setVideoTitle(entity.getName());
+                    loadFinshed();
+                }
+            }
+        });
+        pareseVideoByWebview.startParseVideo(entity.getSiteUrl());
 //        getSupportLoaderManager().restartLoader(1, null, videoLoader);
     }
 
@@ -123,8 +138,7 @@ public class VideoPlayerActivity extends BaseFragmentActivity implements Loading
                     PlayVideoEntitiy entitiy = AnalysJson.getEntity(data, PlayVideoEntitiy.class);
                     if (entitiy != null) {
                         String url = entitiy.getData().get(0).getList().get(0);
-                        playerView.onPrepareAsync(url);
-                        playerView.onStartPlay();
+
                     }
                     loadFinshed();
                 } catch (Exception e) {

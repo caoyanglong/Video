@@ -154,7 +154,6 @@ public class Constants {
     public static final String GET_VIDEO_LIST_DATA_API = "/API/v.asmx/getVideoData";
 
 
-
     public static final String APPID = "f8cc1b8da74147bbbd50619700a7fef3";
 
     public static final String keyConstants = "000000000000000000000000";
@@ -165,15 +164,20 @@ public class Constants {
      * 第三方的解析平台
      */
     public static final String PLUGIN_API = "http://jiexi888.duapp.com/?url=";
+    public static final String PLUGIN_API2 = "http://jx.aikantv.cc/index.php?url=";
 
 
-    public static String getImageUrl(String iconUrl){
-        if(!iconUrl.contains("http")){
-            iconUrl = ImageHost+iconUrl;
+    public static String getImageUrl(String iconUrl) {
+        if(iconUrl == null)
+            return "";
+        if (!iconUrl.contains("http")) {
+            iconUrl = ImageHost + iconUrl;
         }
         return iconUrl;
     }
+
     public static List<String> VideoHostList = new ArrayList<>();
+
     static {
         VideoHostList.add("http://cache1.video.v.zhuovi.cn");
         VideoHostList.add("http://cache2.video.v.zhuovi.cn");
@@ -184,6 +188,55 @@ public class Constants {
         VideoHostList.add("http://api.v.zhuovi.cn");
     }
     /*********************************************************************************************************/
+/********************************************third video platform*******************************************************************/
+
+    /*列表接收参数：
+    ac=list
+            t=类别ID
+    pg=页码
+            wd=搜索关键字
+    h=几小时内的数据*/
+    /**
+     * 第三方 视频地址
+     */
+    public static final String THIRD_VIDEO_API = "http://ypd.lefengka.com/video/inc/api.php";
+    /**
+     * 视频详情
+     */
+    public static final String THIRD_VIDEO_DETAIL_API = "http://ypd.lefengka.com/video/inc/api.php?ac=videolist&ids=";
+    public static final String AC_KEY = "ac";
+    public static final String T_KEY = "t";
+    public static final String PG_KEY = "pg";
+
+    /*(电影)
+t＝5返回的是动作片数据
+t=6返回的是喜剧片数据
+t=7返回的是爱情片数据
+t=8返回的是科幻片数据
+t＝9返回的是恐怖片数据
+t＝10返回的是剧情片数据
+t＝11返回的是战争片数据
+
+
+
+（电视剧）
+t=12返回的是国产剧数据
+t＝13返回的是港台剧数据
+t＝14返回的是日韩剧数据
+t＝15返回的是欧美剧数据
+
+
+(综艺)
+t=3返回的是综艺数据
+
+
+（动漫）
+t＝4返回的是动漫数据
+
+(娱乐)
+t＝21返回的是娱乐数据
+（MV）
+t＝22返回的是MV数据*/
 
 
 }
