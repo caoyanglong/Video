@@ -43,6 +43,8 @@ public class VideoPlayerActivity extends BaseFragmentActivity implements Loading
 
     @Override
     public void initView() {
+
+        Toast.makeText(this,"",Toast.LENGTH_LONG).show();
         playerView = (VideoPlayerView) findViewById(R.id.player);
         loadingView = (LoadingView) findViewById(R.id.loading_view);
     }
